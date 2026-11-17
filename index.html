@@ -5,13 +5,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #F3E7FF, #E0F7FF, #FFE8F1);
+            padding: 30px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: black;
+            font-size: 36px;
+            margin-bottom: 12px;
+            text-shadow: 1px 2px 2px #444;
+        }
+        body > p {
+            text-align: center;
+            color: black;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+        form {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
 
+        fieldset {
+            border: 2px solid #9B59B6;
+            border-left: 7px solid #9B59B6;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            background: #FAF7FF;
+        }
+
+        legend {
+            font-size: 21px;
+            font-weight: bold;
+            color: #7F00FF;
+            padding: 0 12px;
+        }
+
+        fieldset:nth-of-type(2) {
+            border-color: #FF6B81;
+            background: #FFF5F7;
+        }
+
+        fieldset:nth-of-type(3) {
+            border-color: #00A8CC;
+            background: #F0FCFF;
+        }
+
+        fieldset:nth-of-type(4) {
+            border-color: #F39C12;
+            background: #FFFAEF;
+        }
+
+        fieldset:nth-of-type(5) {
+            border-color: #27AE60;
+            background: #F1FFF5;
+        }
+
+        fieldset:nth-of-type(6) {
+            border-color: #E056A0;
+            background: #FFF4FA;
+        }
+
+        fieldset:nth-of-type(7) {
+            border-color: #536DFE;
+            background: #F3F5FF;
+        }
+
+        fieldset:nth-of-type(2) legend { color: #E84362; }
+        fieldset:nth-of-type(3) legend { color: #0086A8; }
+        fieldset:nth-of-type(4) legend { color: #D68910; }
+        fieldset:nth-of-type(5) legend { color: #219653; }
+        fieldset:nth-of-type(6) legend { color: #D63384; }
+        fieldset:nth-of-type(7) legend { color: #4056D6; }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #444;
+            margin-top: 15px;
+            margin-bottom: 7px;
+        }
+
+        input:not([type="radio"]):not([type="checkbox"]),
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #D6D6E7;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        /* When a user clicks an input */
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #8E44AD;
+            box-shadow: 0 0 7px rgba(142, 68, 173, 0.3);
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            width: auto;
+            margin: 12px 5px 12px 0;
+            accent-color: #8E44AD;
+            transform: scale(1.15);
+        }
+
+        /* Keep radio and checkbox labels beside their controls */
+        input[type="radio"] + label,
+        input[type="checkbox"] + label {
+            display: inline-block;
+            margin: 8px 15px 8px 0;
+            font-weight: normal;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        button {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 10px;
+            background-color: #7F00FF;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 8px 0 0;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #5E00BD;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(74, 0, 224, 0.3);
+        }
+
+        button[type="reset"] {
+            background-color: #FF512F;
+        }
+
+        button[type="reset"]:hover {
+            background-color: #DD2476;
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+            h1 {
+                font-size: 27px;
+            }
+            form {
+                padding: 15px;
+            }
+            fieldset {
+                padding: 15px;
+            }
+            button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>Student Registration Form</h1>
     <p>Please fill in the details below to register.</p>
-    <form>
+    <form id="registrationform">
         <!-- Personal Details -->
          <fieldset>
             <legend>Personal Details</legend>
@@ -348,9 +528,22 @@
 
 
     </form>
+    <p id="successmessage"></p>
 
     <script>
-
+        const form=document.getElementById("registrationform");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const password=document.getElementById("password").value;
+            const confirmpassword=document.getElementById("confirmpassword").value;
+            if(password !== confirmpassword) {
+                alert("Passwords do not match!");
+                return;
+            }
+            document.getElementById("successmessage").textContent="Registation successful!";
+            document.getElementById("successmessage").style.color="green";
+            form.reset();
+        })
 
     </script>
 </body>
